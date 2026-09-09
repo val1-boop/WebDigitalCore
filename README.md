@@ -1,16 +1,45 @@
-# React + Vite
+# Sistema de Gestión de Recursos Universitarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Panel web para administrar la reservación de espacios y equipo dentro de una institución educativa, con control de accesos por rol y bitácora de auditoría.
 
-Currently, two official plugins are available:
+## Qué hace
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Autenticación** — inicio de sesión, recuperación de contraseña y rutas protegidas por sesión
+- **Usuarios** — alta, edición y listado de usuarios del sistema
+- **Recursos** — catálogo de espacios y equipo disponible
+- **Solicitudes** — registro de nuevas solicitudes e historial por usuario
+- **Reservaciones** — asignación de recursos en fechas y horarios
+- **Auditoría** — historial de acciones realizadas en el sistema
 
-## React Compiler
+## Estructura
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+├── pages/
+│   ├── auth/          # Login, ForgotPassword
+│   ├── users/         # UserList, UserForm
+│   ├── resources/     # Spaces, Equipment
+│   ├── requests/      # NewRequest, RequestHistory
+│   ├── reservations/  # Reservations
+│   └── audit/         # AuditHistory
+├── services/          # Cliente HTTP y servicios por dominio (api, auth, requests)
+├── context/           # AuthContext: sesión global
+├── hooks/             # useAuth
+├── layout/            # DashboardLayout
+└── routes/            # AppRoutes
+```
 
-## Expanding the ESLint configuration
+La lógica de red está aislada en `services/`, de modo que las pantallas no hacen peticiones directamente.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologías
+
+React · Vite · React Router · Context API · ESLint
+
+## Cómo ejecutarlo
+
+```bash
+npm install
+npm run dev
+```
+
+La aplicación queda disponible en `http://localhost:5173`.
